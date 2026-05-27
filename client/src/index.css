@@ -1,0 +1,418 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Color Palettes */
+  --color-bg-light: #f0f4f9;
+  --color-bg-dark: #090a0f;
+  
+  --color-text-light: #1e293b;
+  --color-text-dark: #f8fafc;
+  --color-text-muted-light: #64748b;
+  --color-text-muted-dark: #94a3b8;
+  
+  --color-card-bg-light: rgba(255, 255, 255, 0.75);
+  --color-card-bg-dark: rgba(15, 17, 26, 0.65);
+  
+  --color-card-border-light: rgba(226, 232, 240, 0.8);
+  --color-card-border-dark: rgba(255, 255, 255, 0.08);
+  
+  --color-brand-light: #4f46e5; /* Beautiful Indigo */
+  --color-brand-dark: #818cf8;
+  --color-brand-hover-light: #4338ca;
+  --color-brand-hover-dark: #6366f1;
+  --color-brand-bg-light: rgba(79, 70, 229, 0.08);
+  --color-brand-bg-dark: rgba(129, 140, 248, 0.12);
+  
+  --color-success-light: #0d9488; /* Emerald Teal */
+  --color-success-dark: #2dd4bf;
+  --color-success-bg-light: rgba(13, 148, 136, 0.08);
+  --color-success-bg-dark: rgba(45, 212, 191, 0.12);
+  --color-success-border-light: rgba(13, 148, 136, 0.2);
+  --color-success-border-dark: rgba(45, 212, 191, 0.25);
+  
+  --color-error-light: #e11d48; /* Premium Rose */
+  --color-error-dark: #fb7185;
+  --color-error-bg-light: rgba(225, 29, 72, 0.08);
+  --color-error-bg-dark: rgba(251, 113, 133, 0.12);
+  --color-error-border-light: rgba(225, 29, 72, 0.2);
+  --color-error-border-dark: rgba(251, 113, 133, 0.25);
+  
+  --color-shadow-light: rgba(0, 0, 0, 0.06) 0px 20px 40px -10px, rgba(0, 0, 0, 0.03) 0px 10px 20px -5px;
+  --color-shadow-dark: rgba(0, 0, 0, 0.4) 0px 20px 40px -10px, rgba(0, 0, 0, 0.2) 0px 10px 20px -5px;
+
+  /* Theme Mapping */
+  --bg: light-dark(var(--color-bg-light), var(--color-bg-dark));
+  --text: light-dark(var(--color-text-light), var(--color-text-dark));
+  --text-muted: light-dark(var(--color-text-muted-light), var(--color-text-muted-dark));
+  --card-bg: light-dark(var(--color-card-bg-light), var(--color-card-bg-dark));
+  --card-border: light-dark(var(--color-card-border-light), var(--color-card-border-dark));
+  
+  --brand: light-dark(var(--color-brand-light), var(--color-brand-dark));
+  --brand-hover: light-dark(var(--color-brand-hover-light), var(--color-brand-hover-dark));
+  --brand-bg: light-dark(var(--color-brand-bg-light), var(--color-brand-bg-dark));
+  
+  --success: light-dark(var(--color-success-light), var(--color-success-dark));
+  --success-bg: light-dark(var(--color-success-bg-light), var(--color-success-bg-dark));
+  --success-border: light-dark(var(--color-success-border-light), var(--color-success-border-dark));
+  
+  --error: light-dark(var(--color-error-light), var(--color-error-dark));
+  --error-bg: light-dark(var(--color-error-bg-light), var(--color-error-bg-dark));
+  --error-border: light-dark(var(--color-error-border-light), var(--color-error-border-dark));
+  
+  --shadow: light-dark(var(--color-shadow-light), var(--color-shadow-dark));
+
+  /* Styling Setup */
+  color-scheme: light dark;
+  accent-color: var(--brand);
+}
+
+/* Fallback for browsers without light-dark() support */
+@supports not (color: light-dark(red, blue)) {
+  :root {
+    --bg: var(--color-bg-light);
+    --text: var(--color-text-light);
+    --text-muted: var(--color-text-muted-light);
+    --card-bg: var(--color-card-bg-light);
+    --card-border: var(--color-card-border-light);
+    --brand: var(--color-brand-light);
+    --brand-hover: var(--color-brand-hover-light);
+    --brand-bg: var(--color-brand-bg-light);
+    --success: var(--color-success-light);
+    --success-bg: var(--color-success-bg-light);
+    --success-border: var(--color-success-border-light);
+    --error: var(--color-error-light);
+    --error-bg: var(--color-error-bg-light);
+    --error-border: var(--color-error-border-light);
+    --shadow: var(--color-shadow-light);
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: var(--color-bg-dark);
+      --text: var(--color-text-dark);
+      --text-muted: var(--color-text-muted-dark);
+      --card-bg: var(--color-card-bg-dark);
+      --card-border: var(--color-card-border-dark);
+      --brand: var(--color-brand-dark);
+      --brand-hover: var(--color-brand-hover-dark);
+      --brand-bg: var(--color-brand-bg-dark);
+      --success: var(--color-success-dark);
+      --success-bg: var(--color-success-bg-dark);
+      --success-border: var(--color-success-border-dark);
+      --error: var(--color-error-dark);
+      --error-bg: var(--color-error-bg-dark);
+      --error-border: var(--color-error-border-dark);
+      --shadow: var(--color-shadow-dark);
+    }
+  }
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: 
+    radial-gradient(at 0% 0%, light-dark(rgba(79, 70, 229, 0.05), rgba(79, 70, 229, 0.15)) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, light-dark(rgba(244, 63, 94, 0.03), rgba(244, 63, 94, 0.1)) 0px, transparent 50%);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@supports not (color: light-dark(red, blue)) {
+  body {
+    background-image: 
+      radial-gradient(at 0% 0%, rgba(79, 70, 229, 0.05) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(244, 63, 94, 0.03) 0px, transparent 50%);
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    body {
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(79, 70, 229, 0.15) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(244, 63, 94, 0.1) 0px, transparent 50%);
+    }
+  }
+}
+
+#root {
+  width: 100%;
+  max-width: 600px;
+  padding: 24px;
+}
+
+/* Glassmorphism Container */
+.quiz-container {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.quiz-container:hover {
+  box-shadow: 
+    var(--shadow),
+    0 0 0 1px var(--card-border);
+}
+
+.quiz-header {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.quiz-badge {
+  display: inline-flex;
+  padding: 6px 12px;
+  background-color: var(--brand-bg);
+  color: var(--brand);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 9999px;
+  margin-bottom: 16px;
+  font-family: 'Outfit', sans-serif;
+}
+
+.quiz-question {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--text);
+  margin: 0;
+}
+
+/* Options Stack */
+.options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+/* Custom Interactive Option Card */
+.option-label {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 24px;
+  background: light-dark(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.02));
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+@supports not (color: light-dark(red, blue)) {
+  .option-label {
+    background: rgba(255, 255, 255, 0.4);
+  }
+  @media (prefers-color-scheme: dark) {
+    .option-label {
+      background: rgba(255, 255, 255, 0.02);
+    }
+  }
+}
+
+.option-label:hover {
+  background: light-dark(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.05));
+  border-color: light-dark(rgba(79, 70, 229, 0.3), rgba(129, 140, 248, 0.3));
+  transform: translateY(-2px) scale(1.005);
+}
+
+@supports not (color: light-dark(red, blue)) {
+  .option-label:hover {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(79, 70, 229, 0.3);
+  }
+  @media (prefers-color-scheme: dark) {
+    .option-label:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(129, 140, 248, 0.3);
+    }
+  }
+}
+
+/* Selected state for option cards */
+.option-label.selected {
+  background: var(--brand-bg);
+  border-color: var(--brand);
+  box-shadow: 0 4px 20px -5px var(--brand-bg);
+}
+
+/* Radio Input */
+.option-radio {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: transparent;
+  margin: 0;
+  font: inherit;
+  color: var(--brand);
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--text-muted);
+  border-radius: 50%;
+  display: grid;
+  place-content: center;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.option-radio::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  background-color: var(--brand);
+}
+
+.option-radio:checked {
+  border-color: var(--brand);
+}
+
+.option-radio:checked::before {
+  transform: scale(1);
+}
+
+/* Submit Action Button */
+.submit-btn {
+  width: 100%;
+  padding: 16px 32px;
+  background: var(--brand);
+  color: #ffffff;
+  border: none;
+  border-radius: 16px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px 0 rgba(79, 70, 229, 0.3);
+}
+
+.submit-btn:hover:not(:disabled) {
+  background: var(--brand-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px 0 rgba(79, 70, 229, 0.4);
+}
+
+.submit-btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Feedback Message Card */
+.feedback-card {
+  margin-top: 24px;
+  padding: 20px;
+  border-radius: 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.feedback-card.correct {
+  background-color: var(--success-bg);
+  border: 1px solid var(--success-border);
+  color: var(--success);
+  animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.feedback-card.incorrect {
+  background-color: var(--error-bg);
+  border: 1px solid var(--error-border);
+  color: var(--error);
+  animation: shake 0.4s ease-in-out both;
+}
+
+.feedback-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.feedback-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.feedback-title {
+  font-weight: 700;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.1rem;
+}
+
+/* Animations */
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  20%, 60% {
+    transform: translateX(-8px);
+  }
+  40%, 80% {
+    transform: translateX(8px);
+  }
+}
+
+/* Option Animations Stagger */
+.option-label:nth-child(1) { animation: popIn 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) 0.1s both; }
+.option-label:nth-child(2) { animation: popIn 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) 0.2s both; }
+.option-label:nth-child(3) { animation: popIn 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) 0.3s both; }
+.option-label:nth-child(4) { animation: popIn 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) 0.4s both; }
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .quiz-container {
+    padding: 24px;
+  }
+  
+  .quiz-question {
+    font-size: 1.25rem;
+  }
+  
+  .option-label {
+    padding: 14px 18px;
+    font-size: 0.95rem;
+  }
+}
