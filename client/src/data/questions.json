@@ -1,0 +1,32 @@
+[
+  {
+    "id": "q1",
+    "question": "Which of the following is not a primitive data type in JavaScript?",
+    "options": ["String", "Number", "Boolean", "Object"],
+    "correctAnswer": "Object"
+  },
+  {
+    "id": "q2",
+    "question": "Which operator is used to compare both value and type in JavaScript?",
+    "options": ["==", "===", "=", "equals"],
+    "correctAnswer": "==="
+  },
+  {
+    "id": "q3",
+    "question": "Which keyword is used to define a block-scoped variable that cannot be reassigned?",
+    "options": ["var", "let", "const", "def"],
+    "correctAnswer": "const"
+  },
+  {
+    "id": "q4",
+    "question": "What does 'typeof null' return in JavaScript?",
+    "options": ["\"null\"", "\"undefined\"", "\"object\"", "\"number\""],
+    "correctAnswer": "\"object\""
+  },
+  {
+    "id": "q5",
+    "question": "Which of the following is used to handle asynchronous operations in modern JavaScript?",
+    "options": ["Callbacks", "Promises", "Async/Await", "All of the above"],
+    "correctAnswer": "All of the above"
+  }
+]
