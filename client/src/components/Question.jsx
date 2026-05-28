@@ -43,7 +43,12 @@ export default function Question ({quizQuestion, quizState, totalQuestions, disp
             
             <form onSubmit={handleSubmit}>
                 {options.map( (option, index) => {
-                    const selected = option === selectedOption;
+                    let selected;
+                    if (quizState.answeredQuestions.has(quizState.index)) {
+                        selected = option === correctAnswer
+                    } else {
+                        selected = option === selectedOption;
+                    }
                     return (
                         <label 
                             key={option} 
