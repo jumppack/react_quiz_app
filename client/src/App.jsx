@@ -1,13 +1,8 @@
-import {useState, useReducer} from 'react';
+import { useReducer} from 'react';
 import Question from './components/Question';
 import testQuestions from './data/questions.json';
 
 function App() {
-
-  // Lazy initialization, runs only once
-  // const [questionIdx] = useState(() => 
-  //   Math.floor(Math.random() * testQuestions.length)
-  // );
 
   const reducer = (prevState, action) => {
     switch (action.type) {
