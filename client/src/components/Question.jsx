@@ -7,14 +7,18 @@ export default function Question ({quizQuestion, quizState, totalQuestions, disp
  
     const {question, options, correctAnswer} = quizQuestion;
 
+    const resetState = () => {
+        setSelectedOption(null);
+        setSubmitted(false);
+        setIsCorrect(false);
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
         if (submitted) {
             // Try again logic
-            setSubmitted(false);
-            setSelectedOption(null);
-            setIsCorrect(false);
+            resetState();
             return;
         } else {
             if(!selectedOption) return;
@@ -75,27 +79,35 @@ export default function Question ({quizQuestion, quizState, totalQuestions, disp
                 disabled = {quizState.index === 0}
                 onClick={() => {
                     dispatch({type: 'prev'});
-                    setSelectedOption(null);
-                    setSubmitted(false);
-                    setIsCorrect(false);
-
+                    resetState();
                 }}
                 className="submit-btn"
                 >
                     Previous
                 </button>
-                <button
-                disabled = {quizState.index === totalQuestions - 1 || !quizState.answeredQuestions.has(quizState.index)}
-                onClick={() => {
-                    dispatch({type: 'next'});
-                    setSelectedOption(null);
-                    setSubmitted(false);
-                    setIsCorrect(false);
-                }}
-                className="submit-btn"
-                >
-                    Next
-                </button>
+
+                {(quizState.index === totalQuestions - 1) ? (
+                    <button 
+                        className="submit-btn"
+                        disabled={!submitted}
+                        onClick={() => {
+                            dispatch({type: 'restart'});
+                            resetState();
+                            }}>
+                        Restart
+                    </button>
+                ) : (   
+                    <button
+                        disabled = {!quizState.answeredQuestions.has(quizState.index)}
+                    onClick={() => {
+                        dispatch({type: 'next'});
+                        resetState();
+                    }}
+                    className="submit-btn"
+                    >
+                        Next
+                    </button>
+                )}
             </div>
 
             {submitted &&

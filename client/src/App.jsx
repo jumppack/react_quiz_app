@@ -18,7 +18,7 @@ function App() {
         case 'scoreup':
             return {...prevState, score: prevState.score + 1};
         case 'restart':
-            return {...prevState, index: 0, score: 0};
+            return {...prevState, index: 0, score: 0, answeredQuestions: new Set()};
         case 'answered': {
             const newAnswered = new Set(prevState.answeredQuestions);
             newAnswered.add(action.payload);
