@@ -1,10 +1,10 @@
 import {useState} from 'react'
 
-export default function Question ({quizQuestion}) {
+export default function Question ({quizQuestion, quizState, totalQuestions, dispatch}) {
     const [selectedOption, setSelectedOption] = useState(null);
     const [submitted, setSubmitted] = useState(false);
     const [isCorrect, setIsCorrect] = useState(false);
-
+ 
     const {question, options, correctAnswer} = quizQuestion;
 
     const handleSubmit = (e) => {
@@ -19,6 +19,12 @@ export default function Question ({quizQuestion}) {
         } else {
             if(!selectedOption) return;
             const correct = selectedOption === correctAnswer
+            if (correct) {
+                if (!quizState.answeredQuestions.has(quizState.index)) {
+                    dispatch({type: "scoreup"})
+                    dispatch({type: "answered", payload: quizState.index});
+                }
+            }
             setIsCorrect(correct);
             setSubmitted(true);
         }
@@ -57,12 +63,40 @@ export default function Question ({quizQuestion}) {
 
                 <button
                     type="submit"
-                    disabled={selectedOption === null}
+                    disabled={ selectedOption === null}
                     className="submit-btn"
                 >
                     {submitted ? "Try Again" : "Submit Answer"}
                 </button>
             </form>
+
+            <div className="navigationButtons">
+                <button
+                disabled = {quizState.index === 0}
+                onClick={() => {
+                    dispatch({type: 'prev'});
+                    setSelectedOption(null);
+                    setSubmitted(false);
+                    setIsCorrect(false);
+
+                }}
+                className="submit-btn"
+                >
+                    Previous
+                </button>
+                <button
+                disabled = {quizState.index === totalQuestions - 1 || !quizState.answeredQuestions.has(quizState.index)}
+                onClick={() => {
+                    dispatch({type: 'next'});
+                    setSelectedOption(null);
+                    setSubmitted(false);
+                    setIsCorrect(false);
+                }}
+                className="submit-btn"
+                >
+                    Next
+                </button>
+            </div>
 
             {submitted &&
                 <div className={`feedback-card ${isCorrect ? "correct" : "incorrect"}`}>

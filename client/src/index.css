@@ -328,6 +328,13 @@ body {
   box-shadow: none;
 }
 
+.navigationButtons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
+}
+
 /* Feedback Message Card */
 .feedback-card {
   margin-top: 24px;
