@@ -6,13 +6,14 @@ export default function Question ({quizQuestion, quizState, totalQuestions, disp
     const [isCorrect, setIsCorrect] = useState(false);
  
     const {question, options, correctAnswer} = quizQuestion;
-    const alreadyAnswered = quizState.answeredQuestions.has(quizState.index);
 
     const resetState = () => {
         setSelectedOption(null);
         setSubmitted(false);
         setIsCorrect(false);
     }
+
+    const alreadyAnswered = quizState.answeredQuestions.has(quizState.index);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -25,7 +26,7 @@ export default function Question ({quizQuestion, quizState, totalQuestions, disp
             if(!selectedOption) return;
             const correct = selectedOption === correctAnswer
             if (correct) {
-                if (!quizState.answeredQuestions.has(quizState.index)) {
+                if (!alreadyAnswered) {
                     dispatch({type: "scoreup"})
                     dispatch({type: "answered", payload: quizState.index});
                 }
@@ -44,7 +45,7 @@ export default function Question ({quizQuestion, quizState, totalQuestions, disp
             
             <form onSubmit={handleSubmit}>
                 {options.map( (option, index) => {
-                    const selected = alreadyAnswered
+                    const selected = alreadyAnswered 
                         ? option === correctAnswer
                         : option === selectedOption;
                     return (
@@ -101,12 +102,12 @@ export default function Question ({quizQuestion, quizState, totalQuestions, disp
                     </button>
                 ) : (   
                     <button
-                        disabled = {!quizState.answeredQuestions.has(quizState.index)}
-                    onClick={() => {
-                        dispatch({type: 'next'});
-                        resetState();
-                    }}
-                    className="submit-btn"
+                        disabled = {!alreadyAnswered}
+                        onClick={() => {
+                            dispatch({type: 'next'});
+                            resetState();
+                        }}
+                        className="submit-btn"
                     >
                         Next
                     </button>
