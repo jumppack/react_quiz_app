@@ -39,7 +39,7 @@ async function seedDatabase() {
 // Connect to MongoDB
 export async function connectDB() {
   const uri = process.env.MONGODB_URI;
-  if (!uri || uri === 'your_mongodb_atlas_connection_string_here') {
+  if (!uri) {
     console.error('CRITICAL: MONGODB_URI environment variable is missing or unconfigured in server/.env!');
     process.exit(1);
   }

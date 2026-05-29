@@ -10,7 +10,7 @@ const app = express();
 const PORT = process.env.PORT || 5001;
 
 app.use(cors());
-app.use(express.json());
+app.use(express.json()); // for populating req.body
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
@@ -18,6 +18,10 @@ app.get('/api/health', (req, res) => {
 });
 
 // GET questions endpoint
+app.get('/', (req, res) => {
+  res.send('Welcome to the quiz API!')
+})
+
 app.get('/api/questions', async (req, res) => {
   try {
     const questions = await Question.find({});
@@ -27,6 +31,19 @@ app.get('/api/questions', async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch questions from database' });
   }
 });
+
+app.get('/api/question/:id', async (req, res, next) => {
+  try {
+    const question = await Question.findOne({id: req.params.id});
+    if (!question) {
+      return res.status(404).json({error: 'Question not found.'})
+    }
+    res.json(question);
+  } catch (error) {
+    console.error('Error fetching question:', error);
+    res.status(500).json({error: 'Failed to fetch question from database'});
+  }
+})
 
 // Connect database and start server
 async function startServer() {
