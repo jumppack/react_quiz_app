@@ -6,6 +6,7 @@ export default function Question ({quizQuestion, quizState, totalQuestions, disp
     const [isCorrect, setIsCorrect] = useState(false);
  
     const {question, options, correctAnswer} = quizQuestion;
+    const alreadyAnswered = quizState.answeredQuestions.has(quizState.index);
 
     const resetState = () => {
         setSelectedOption(null);
@@ -43,12 +44,9 @@ export default function Question ({quizQuestion, quizState, totalQuestions, disp
             
             <form onSubmit={handleSubmit}>
                 {options.map( (option, index) => {
-                    let selected;
-                    if (quizState.answeredQuestions.has(quizState.index)) {
-                        selected = option === correctAnswer
-                    } else {
-                        selected = option === selectedOption;
-                    }
+                    const selected = alreadyAnswered
+                        ? option === correctAnswer
+                        : option === selectedOption;
                     return (
                         <label 
                             key={option} 
@@ -61,7 +59,7 @@ export default function Question ({quizQuestion, quizState, totalQuestions, disp
                                 name="quiz-option"
                                 value={option}
                                 checked={selected}
-                                disabled={submitted}
+                                disabled={alreadyAnswered || submitted}
                                 onChange={ () => setSelectedOption(option)}
                                 className="option-radio"
                             />
@@ -72,7 +70,7 @@ export default function Question ({quizQuestion, quizState, totalQuestions, disp
 
                 <button
                     type="submit"
-                    disabled={ selectedOption === null}
+                    disabled={ alreadyAnswered ||selectedOption === null}
                     className="submit-btn"
                 >
                     {submitted ? "Try Again" : "Submit Answer"}
